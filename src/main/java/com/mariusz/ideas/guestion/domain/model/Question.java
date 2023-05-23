@@ -1,4 +1,4 @@
-package com.mariusz.ideas;
+package com.mariusz.ideas.guestion.domain.model;
 
 
 

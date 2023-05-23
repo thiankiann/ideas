@@ -1,5 +1,6 @@
-package com.mariusz.ideas;
+package com.mariusz.ideas.guestion.service;
 
+import com.mariusz.ideas.guestion.domain.model.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
