@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuestionsService {
@@ -14,5 +15,20 @@ public class QuestionsService {
                 new Question("Question 1"),
                 new Question("Question 2")
         );
+    }
+
+    public Question getQuestion(UUID id) {
+        return null;
+    }
+
+    public Question createQuestion(Question question) {
+        return null;
+    }
+
+    public Question updateQuestion(UUID id, Question question) {
+        return null;
+    }
+
+    public void deleteQuestion(UUID id) {
     }
 }
