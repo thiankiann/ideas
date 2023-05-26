@@ -2,6 +2,7 @@ package com.mariusz.ideas.guestion.controller;
 
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.QuestionsService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,15 +44,16 @@ public class QuestionController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     Question createQuestion(@RequestBody Question question){
         return questionsService.createQuestion(question);
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("{id}")
     Question updateQuestion(@PathVariable UUID id, @RequestBody Question question){
         return questionsService.updateQuestion(id, question);
     }
-
+   @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     void deleteQuestion(@PathVariable UUID id){
         questionsService.deleteQuestion(id);
