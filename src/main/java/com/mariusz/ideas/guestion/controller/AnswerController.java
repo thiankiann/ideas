@@ -24,12 +24,12 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping("/api/v1/questions")
-public class QuestionController {
+@RequestMapping("/api/v1/questions/{question-id}/answers")
+public class AnswerController {
 
     private final QuestionsService questionsService;
 
-    public QuestionController(QuestionsService questionsService) {
+    public AnswerController(QuestionsService questionsService) {
         this.questionsService = questionsService;
     }
 
