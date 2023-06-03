@@ -1,7 +1,8 @@
 package com.mariusz.ideas.guestion.controller;
 
+import com.mariusz.ideas.guestion.domain.model.Answer;
 import com.mariusz.ideas.guestion.domain.model.Question;
-import com.mariusz.ideas.guestion.service.QuestionsService;
+import com.mariusz.ideas.guestion.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,35 +28,38 @@ import java.util.UUID;
 @RequestMapping("/api/v1/questions/{question-id}/answers")
 public class AnswerController {
 
-    private final QuestionsService questionsService;
+    private final AnswerService answerService;
 
-    public AnswerController(QuestionsService questionsService) {
-        this.questionsService = questionsService;
+    public AnswerController(AnswerService answerService) {
+        this.answerService = answerService;
     }
 
     @GetMapping
-    List<Question> getQuestions() {
-        return questionsService.getQuestions();
+    List<Answer> getAnswers(@PathVariable("question-id") UUID questionId) {
+        return answerService.getAnswers(questionId);
     }
 
-    @GetMapping("{id}")
-    Question getQuestion(@PathVariable UUID id) {
-        return questionsService.getQuestion(id);
+    @GetMapping("{answer-id}")
+    Answer getAnswer(@PathVariable("question-id") UUID questionId, @PathVariable("answer-id") UUID answerId) {
+        return answerService.getAnswer(answerId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Question createQuestion(@RequestBody Question question){
-        return questionsService.createQuestion(question);
+    Answer createAnswer(@PathVariable("question-id") UUID questionId , @RequestBody Answer answer){
+        return answerService.createAnswer(questionId, answer);
     }
+
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PutMapping("{id}")
-    Question updateQuestion(@PathVariable UUID id, @RequestBody Question question){
-        return questionsService.updateQuestion(id, question);
+    @PutMapping("{answer-id}")
+    Answer updateAnswer(@PathVariable("question-id") UUID questionId, @PathVariable ("answer-id") UUID answerId,
+                        @RequestBody Answer answer){
+        return answerService.updateAnswer(answerId, answer);
     }
+
    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("{id}")
-    void deleteQuestion(@PathVariable UUID id){
-        questionsService.deleteQuestion(id);
+   @DeleteMapping("{answer-id}")
+    void deleteAnswer(@PathVariable("answer-id") UUID answerId){
+       answerService.deleteAnswer(answerId);
     }
 }
