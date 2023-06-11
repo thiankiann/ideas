@@ -24,8 +24,8 @@ public class QuestionViewController {
     @GetMapping
     public String indexView(Model model){
         model.addAttribute("questions", questionsService.getQuestions());
-        //return "question/index";
-       return "template";
+
+        return "question/index"; 
     }
 
     @GetMapping("{id}")
