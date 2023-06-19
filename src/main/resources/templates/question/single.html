@@ -21,36 +21,17 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Upvotes</th>
-                        <th>Downvotes</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Alice</td>
-                        <td>10</td>
-                        <td>11</td>
+                    <tr th:each="answer : ${answers}">
+                        <td th:text="${answer.name}">Answer</td>
+                        <td>x</td>
+                        <td>x</td>
                     </tr>
-                    <tr>
-                        <td>Bob</td>
-                        <td>4</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Charlie</td>
-                        <td>7</td>
-                        <td>9</td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td>Totals</td>
-                        <td>21</td>
-                        <td>23</td>
-                    </tr>
-                    </tfoot>
                 </table>
-
             </article>
 
             <nav class="blog-pagination" aria-label="Pagination">
