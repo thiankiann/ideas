@@ -52,34 +52,29 @@
                                 </div>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>#</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="category : ${categories}">
-                                        <td th:text="${category.name}"></td>
-                                        <td>
-                                            <a th:href="@{'/categories/'+${category.id}}" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-folder"></i>View
-                                            </a>
-                                            <a th:href="@{'/admin/categories/'+${category.id}}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-pencil-alt"></i> Edit
-                                            </a>
-                                            <a th:href="@{'/admin/categories/'+${category.id}+'/delete'}" class="btn btn-danger btn-sm"
-                                               onclick="return confirm('Are you sure?');">
-                                                <i class="fas fa-trash">  </i>  Delete
-                                            </a>
-                                        </td>
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Category</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="categoryName">Email address</label>
+                                            <input type="text" class="form-control" id="categoryName" placeholder="Enter email">
+                                        </div>
 
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </div>
+                            <!-- /.card -->
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
