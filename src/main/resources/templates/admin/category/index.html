@@ -63,7 +63,18 @@
                                     <tbody>
                                     <tr th:each="category : ${categories}">
                                         <td th:text="${category.name}"></td>
-                                        <td>View Edit Delete</td>
+                                        <td>
+                                            <a th:href="@{'/categories/'+${category.id}}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-folder"></i>View
+                                            </a>
+                                            <a th:href="@{'/admin/categories/'+${category.id}}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-pencil-alt"></i> Edit
+                                            </a>
+                                            <a th:href="@{'/admin/categories/'+${category.id}+'/delete'}" class="btn btn-danger btn-sm"
+                                               onclick="return confirm('Are you sure?');">
+                                                <i class="fas fa-trash">  </i>  Delete
+                                            </a>
+                                        </td>
 
                                     </tr>
                                     </tbody>
