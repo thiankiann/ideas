@@ -1,6 +1,6 @@
 package com.mariusz.ideas.category.service;
 
-import com.mariusz.ideas.guestion.domain.model.Category;
+import com.mariusz.ideas.category.domain.model.Category;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
