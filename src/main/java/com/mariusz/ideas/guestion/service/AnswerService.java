@@ -12,7 +12,10 @@ import java.util.UUID;
 public class AnswerService {
 
     public List<Answer> getAnswers(UUID questionId) {
-        return Arrays.asList(new Answer("Answer 1"), new Answer("Answer 2"));
+        return Arrays.asList(
+                new Answer("Answer 1"),
+                new Answer("Answer 2"),
+                new Answer("Answer 3"));
     }
 
     public Answer getAnswer(UUID answerId) {
