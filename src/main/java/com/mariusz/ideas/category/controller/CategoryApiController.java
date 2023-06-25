@@ -1,7 +1,7 @@
 package com.mariusz.ideas.category.controller;
 
 import com.mariusz.ideas.category.service.CategoryService;
-import com.mariusz.ideas.guestion.domain.model.Category;
+import com.mariusz.ideas.category.domain.model.Category;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

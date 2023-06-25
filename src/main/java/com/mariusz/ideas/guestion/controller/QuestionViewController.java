@@ -3,7 +3,7 @@ package com.mariusz.ideas.guestion.controller;
 import com.mariusz.ideas.category.service.CategoryService;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.AnswerService;
-import com.mariusz.ideas.guestion.service.QuestionsService;
+import com.mariusz.ideas.guestion.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,19 +17,19 @@ import java.util.UUID;
 @RequestMapping("/questions")
 public class QuestionViewController {
 
-    private final QuestionsService questionsService;
+    private final QuestionService questionService;
     private final CategoryService categoryService;
     private final AnswerService answerService;
 
-    public QuestionViewController(QuestionsService questionsService, CategoryService categoryService, AnswerService answerService) {
-        this.questionsService = questionsService;
+    public QuestionViewController(QuestionService questionService, CategoryService categoryService, AnswerService answerService) {
+        this.questionService = questionService;
         this.categoryService = categoryService;
         this.answerService = answerService;
     }
 
     @GetMapping
     public String indexView(Model model){
-        model.addAttribute("questions", questionsService.getQuestions());
+        model.addAttribute("questions", questionService.getQuestions());
         model.addAttribute("categories", categoryService.getCategories());
 
         return "question/index";
@@ -37,7 +37,7 @@ public class QuestionViewController {
 
     @GetMapping("{id}")
     public String singleView(Model model, @PathVariable UUID id){
-        model.addAttribute("question", questionsService.getQuestion(id));
+        model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("categories", categoryService.getCategories());
         model.addAttribute("answers", answerService.getAnswers(id));
 
@@ -51,7 +51,7 @@ public class QuestionViewController {
     }
     @PostMapping
     public String add(Question question){
-        questionsService.createQuestion(question);
+        questionService.createQuestion(question);
 
         return "redirect:/questions";
     }
