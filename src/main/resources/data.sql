@@ -1,4 +1,4 @@
- /*insert into categories (id, name) values
+ insert into categories (id, name) values
 (gen_random_uuid(), 'Zdrowie'),
 (gen_random_uuid(), 'Zwierzęta'),
 (gen_random_uuid(), 'Turystyka'),
@@ -29,4 +29,3 @@ insert into questions (id, name, category_id) values
 (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select id from categories where name = 'Turystyka')),
 (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select id from categories where name = 'Turystyka'));
 
-  */
