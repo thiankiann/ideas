@@ -1,6 +1,7 @@
 package com.mariusz.ideas.category.service;
 
 import com.mariusz.ideas.category.domain.model.Category;
+import com.mariusz.ideas.category.domain.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -9,27 +10,38 @@ import java.util.UUID;
 
 @Service
 public class CategoryService {
+
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
     public List<Category> getCategories() {
-        return Arrays.asList(
-                new Category("Category 1"),
-                new Category("Category 2"),
-                new Category("Category 3")
-        );
+        return categoryRepository.findAll();
     }
 
     public Category getCategory(UUID id) {
-        return new Category("Category "+  id);
+        return categoryRepository.getById(id);
     }
 
-    public Category createCategory(Category category) {
-        category.setId(UUID.randomUUID());
-        return category;
+    public Category createCategory(Category categoryRequest) {
+        Category category = new Category();
+
+        category.setName(categoryRequest.getName() );
+
+        return categoryRepository.save(category);
     }
 
-    public Category updateCategory(UUID id, Category category) {
-        return category;
+    public Category updateCategory(UUID id, Category categoryRequest) {
+        Category category = categoryRepository.getById(id);
+
+        category.setName(categoryRequest.getName() );
+
+        return categoryRepository.save(category);
     }
 
     public void deleteCategory(UUID id) {
+        categoryRepository.deleteById(id);
     }
 }
