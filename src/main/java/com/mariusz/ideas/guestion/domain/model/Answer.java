@@ -1,18 +1,28 @@
 package com.mariusz.ideas.guestion.domain.model;
 
-import java.util.UUID;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+
+
+import java.util.UUID;
+@Entity
+@Table(name = "answers")
 public class Answer {
 
+    @Id
     private UUID id;
     private String name;
 
     public Answer() {
+        this.id = UUID.randomUUID();
     }
 
     public Answer(String name) {
+        this();
         this.name = name;
-        this.id = UUID.randomUUID();
+
     }
 
     public UUID getId() {
