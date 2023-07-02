@@ -3,10 +3,10 @@ package com.mariusz.ideas.guestion.domain.model;
 
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.mariusz.ideas.category.domain.model.Category;
+import jakarta.persistence.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +17,12 @@ public class Question {
     private UUID id;
     private String name;
 
+    @ManyToOne
+    private Category category;
+
+    @OneToMany(mappedBy = "questions")
+    private Set<Answer> answers;
+
     public Question() {
         this.id = UUID.randomUUID();
     }
@@ -24,6 +30,18 @@ public class Question {
     public Question(String name) {
         this();
         this.name = name;
+    }
+
+    public Question addAnswer(Answer answer){
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getName() {

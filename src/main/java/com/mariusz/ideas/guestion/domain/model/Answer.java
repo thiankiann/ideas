@@ -2,6 +2,7 @@ package com.mariusz.ideas.guestion.domain.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -14,6 +15,9 @@ public class Answer {
     @Id
     private UUID id;
     private String name;
+
+    @ManyToOne
+    private Question question;
 
     public Answer() {
         this.id = UUID.randomUUID();

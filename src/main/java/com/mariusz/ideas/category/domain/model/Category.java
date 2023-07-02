@@ -2,8 +2,10 @@ package com.mariusz.ideas.category.domain.model;
 
 
 
+import com.mariusz.ideas.guestion.domain.model.Question;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -17,6 +19,9 @@ public class Category {
 	private UUID id;
 
 	private String name;
+
+	@ManyToOne
+	private Question question;
 
 	public Category() {
 		this.id = UUID.randomUUID();
