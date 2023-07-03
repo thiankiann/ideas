@@ -29,6 +29,14 @@ public class Answer {
 
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -52,4 +60,5 @@ public class Answer {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

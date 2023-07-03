@@ -6,6 +6,8 @@ package com.mariusz.ideas.guestion.domain.model;
 import com.mariusz.ideas.category.domain.model.Category;
 import jakarta.persistence.*;
 
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,7 +22,7 @@ public class Question {
     @ManyToOne
     private Category category;
 
-    @OneToMany(mappedBy = "questions")
+    @OneToMany(mappedBy = "question")
     private Set<Answer> answers;
 
     public Question() {
@@ -32,8 +34,19 @@ public class Question {
         this.name = name;
     }
 
-    public Question addAnswer(Answer answer){
+    public Question addAnswer(Answer answer) {
+        {
+            if(answers == null ){
+                answers = new LinkedHashSet<>();
+            }
+            answers.add(answer);
+            answer.setQuestion(this);
+        }
         return this;
+    }
+
+    public Set<Answer> getAnswers() {
+        return Collections.unmodifiableSet(answers);
     }
 
     public Category getCategory() {
