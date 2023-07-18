@@ -31,7 +31,7 @@ public class CategoryViewController {
 	@GetMapping("{id}")
 	public String singleView(@PathVariable UUID id, Model model){
 		Category category = categoryService.getCategory(id);
-		List<Question> questions = questionService.getQuestions();
+		List<Question> questions = questionService.findByCategoryId(id);
 
 		model.addAttribute("category", category);
 		model.addAttribute("questions", questions);

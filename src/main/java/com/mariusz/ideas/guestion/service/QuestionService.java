@@ -50,4 +50,9 @@ public class QuestionService {
     public void deleteQuestion(UUID id) {
         questionRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Question> findByCategoryId(UUID id) {
+        return questionRepository.findByCategoryId(id);
+    }
 }
