@@ -43,4 +43,11 @@ public class CategoryAdminViewController {
 		return "redirect:/admin/categories";
 	}
 
+	@GetMapping("{id}/delete")
+	public String deleteView(@PathVariable UUID id){
+
+		categoryService.deleteCategory(id);
+
+		return "redirect:/admin/categories";
+	}
 }
