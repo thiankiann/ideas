@@ -1,5 +1,6 @@
 package com.mariusz.ideas.category.controller;
 
+import com.mariusz.ideas.common.dto.Message;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,15 @@ public class CategoryAdminViewController {
 
 		if(bindingResult.hasErrors()){
 			model.addAttribute("category", category);
-			model.addAttribute("message", "Blad zapisu");
+			model.addAttribute("message", Message.error("Blad zapisu"));
 			return "admin/category/edit";
 		}
 		try {
 			categoryService.updateCategory(id, category);
-			ra.addFlashAttribute("message", "Kategoria Zapisana");
+			ra.addFlashAttribute("message", Message.error("Kategoria Zapisana"));
 		} catch (Exception e) {
 			model.addAttribute("category", category);
+			model.addAttribute("message", Message.error("Nieznany blad zapisu"));
 			return "admin/category/edit";
 		}
 
