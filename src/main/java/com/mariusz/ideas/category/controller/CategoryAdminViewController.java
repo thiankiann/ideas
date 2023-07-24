@@ -50,15 +50,15 @@ public class CategoryAdminViewController {
 
 		if(bindingResult.hasErrors()){
 			model.addAttribute("category", category);
-			model.addAttribute("message", Message.error("Blad zapisu"));
+			model.addAttribute("message", Message.error("Error Saving"));
 			return "admin/category/edit";
 		}
 		try {
 			categoryService.updateCategory(id, category);
-			ra.addFlashAttribute("message", Message.error("Kategoria Zapisana"));
+			ra.addFlashAttribute("message", Message.info("Category Saved"));
 		} catch (Exception e) {
 			model.addAttribute("category", category);
-			model.addAttribute("message", Message.error("Nieznany blad zapisu"));
+			model.addAttribute("message", Message.error("Unknown Error Saving"));
 			return "admin/category/edit";
 		}
 
@@ -66,9 +66,10 @@ public class CategoryAdminViewController {
 	}
 
 	@GetMapping("{id}/delete")
-	public String deleteView(@PathVariable UUID id){
+	public String deleteView(@PathVariable UUID id, RedirectAttributes ra){
 
 		categoryService.deleteCategory(id);
+		ra.addFlashAttribute(Message.info("Category deleted"));
 
 		return "redirect:/admin/categories";
 	}
