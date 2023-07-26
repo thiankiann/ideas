@@ -2,6 +2,8 @@ package com.mariusz.ideas.category.service;
 
 import com.mariusz.ideas.category.domain.model.Category;
 import com.mariusz.ideas.category.domain.repository.CategoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +20,8 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
     @Transactional(readOnly = true)
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
+    public Page<Category> getCategories(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
     @Transactional(readOnly = true)
     public Category getCategory(UUID id) {
