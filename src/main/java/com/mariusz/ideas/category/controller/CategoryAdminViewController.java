@@ -7,11 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.mariusz.ideas.category.domain.model.Category;
 import com.mariusz.ideas.category.service.CategoryService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,9 +28,13 @@ public class CategoryAdminViewController {
 	}
 
 	@GetMapping
-	public String indexView(Pageable pageable, Model model){
-		Page<Category> categoriesPage = categoryService.getCategories(pageable);
+	public String indexView(
+							@RequestParam(name = "s" , required = false) String search,
+							Pageable pageable,
+							Model model){
+		Page<Category> categoriesPage = categoryService.getCategories(search, pageable);
 		model.addAttribute("categoriesPage", categoriesPage);
+		model.addAttribute("search", search);
 
 		paging(model, categoriesPage);
 
