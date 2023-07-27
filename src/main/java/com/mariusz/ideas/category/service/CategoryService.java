@@ -19,9 +19,14 @@ public class CategoryService {
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+
+    @Transactional(readOnly = true)
+    public Page<Category> getCategories(String search, Pageable pageable) {
+        return categoryRepository.findAll(pageable);
+    }
     @Transactional(readOnly = true)
     public Page<Category> getCategories(Pageable pageable) {
-        return categoryRepository.findAll(pageable);
+        return getCategories(null, pageable);
     }
     @Transactional(readOnly = true)
     public Category getCategory(UUID id) {
