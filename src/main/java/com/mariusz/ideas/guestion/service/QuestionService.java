@@ -2,6 +2,9 @@ package com.mariusz.ideas.guestion.service;
 
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.domain.repository.QuestionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,5 +57,10 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public List<Question> findByCategoryId(UUID id) {
         return questionRepository.findByCategoryId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findHot(Pageable pageable) {
+        return questionRepository.findHot(pageable) ;
     }
 }
