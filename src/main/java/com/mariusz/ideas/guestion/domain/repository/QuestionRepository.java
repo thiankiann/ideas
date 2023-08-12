@@ -12,11 +12,13 @@ import java.util.UUID;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
-    List<Question> findByCategoryId(UUID id);
 
-    @Query("from Question q order by q.answers.size desc ")
+    List<Question> findAllByCategoryId(UUID id);
+
+    @Query("from Question q order by q.answers.size desc")
     Page<Question> findHot(Pageable pageable);
 
-    @Query("from Question q where q.answers.size =0")
+    @Query("from Question q where q.answers.size = 0")
     Page<Question> findUnanswered(Pageable pageable);
+
 }

@@ -11,12 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+
 @Service
 public class AnswerService {
 
-    private AnswerRepository answerRepository;
+    private final AnswerRepository answerRepository;
 
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
 
     public AnswerService(AnswerRepository answerRepository, QuestionRepository questionRepository) {
         this.answerRepository = answerRepository;
@@ -32,9 +33,11 @@ public class AnswerService {
     public Answer getAnswer(UUID id) {
         return answerRepository.getById(id);
     }
+
     @Transactional
     public Answer createAnswer(UUID questionId, Answer answerRequest) {
         Answer answer = new Answer();
+
         answer.setName(answerRequest.getName());
 
         Question question = questionRepository.getById(questionId);
@@ -46,6 +49,7 @@ public class AnswerService {
         return answer;
     }
 
+    @Transactional
     public Answer updateAnswer(UUID answerId, Answer answerRequest) {
         Answer answer = answerRepository.getById(answerId);
         answer.setName(answerRequest.getName());
@@ -53,10 +57,10 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
+    @Transactional
     public void deleteAnswer(UUID answerId) {
         answerRepository.deleteById(answerId);
     }
 }
-
 
 

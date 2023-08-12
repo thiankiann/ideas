@@ -21,12 +21,8 @@ public class Category {
 	private UUID id;
 
 	//@NotBlank(message = "{validation.name.NotBlank.message}")  // nie dziala wiec zamienilem na ponizszy uproszczony zapis
-	@NotBlank(message = "You need a name of category to save it ")
 	@Size(min = 3, max = 255)
 	private String name;
-
-	@ManyToOne
-	private Question question;
 
 	public Category() {
 		this.id = UUID.randomUUID();
