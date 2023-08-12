@@ -4,7 +4,9 @@ import com.mariusz.ideas.category.service.CategoryService;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.AnswerService;
 import com.mariusz.ideas.guestion.service.QuestionService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,9 @@ public class QuestionViewController {
     @GetMapping
     public String indexView(Model model){
         model.addAttribute("questions", questionService.getQuestions());
-        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
+        model.addAttribute("categories", categoryService.getCategories(
+                PageRequest.of(0,10, Sort.by("name").ascending())
+        ));
 
         return "question/index";
     }
