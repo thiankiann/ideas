@@ -75,5 +75,19 @@ public class QuestionViewController {
 
         return "question/index";
     }
+    @GetMapping("unanswered")
+    public String unansweredView(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            Model model
+    ){
+        PageRequest pageRequest = PageRequest.of(page -1, ideasConfiguration.getPagingPageSize());
 
+        Page<Question> questionsPage = questionService.findUnanswered(pageRequest);
+
+        model.addAttribute("questionsPage", questionsPage);
+
+        paging(model, questionsPage);
+
+        return "question/index";
+    }
 }
