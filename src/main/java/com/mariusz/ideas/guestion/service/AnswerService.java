@@ -37,7 +37,7 @@ public class AnswerService {
         Answer answer = new Answer();
         answer.setName(answerRequest.getName());
 
-        Question question = questionRepository.getReferenceById(questionId);
+        Question question = questionRepository.getById(questionId);
         question.addAnswer(answer);
 
         answerRepository.save(answer);

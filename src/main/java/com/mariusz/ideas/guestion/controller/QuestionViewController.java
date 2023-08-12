@@ -1,34 +1,33 @@
 package com.mariusz.ideas.guestion.controller;
 
+import com.mariusz.ideas.IdeasConfiguration;
 import com.mariusz.ideas.category.service.CategoryService;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.AnswerService;
 import com.mariusz.ideas.guestion.service.QuestionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+import static com.mariusz.ideas.common.controller.ControllerUtils.paging;
+
 @Controller
 @RequestMapping("/questions")
+@RequiredArgsConstructor
 public class QuestionViewController {
 
     private final QuestionService questionService;
     private final CategoryService categoryService;
     private final AnswerService answerService;
+    private final IdeasConfiguration ideasConfiguration;
 
-    public QuestionViewController(QuestionService questionService, CategoryService categoryService, AnswerService answerService) {
-        this.questionService = questionService;
-        this.categoryService = categoryService;
-        this.answerService = answerService;
-    }
 
     @GetMapping
     public String indexView(Model model){
@@ -60,4 +59,21 @@ public class QuestionViewController {
 
         return "redirect:/questions";
     }
+
+    @GetMapping("hot")
+    public String hotView(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            Model model
+    ){
+        PageRequest pageRequest = PageRequest.of(page -1, ideasConfiguration.getPagingPageSize());
+
+        Page<Question> questionsPage = questionService.findHot(pageRequest);
+
+        model.addAttribute("questionsPage", questionsPage);
+
+        paging(model, questionsPage);
+
+        return "question/index";
+    }
+
 }
