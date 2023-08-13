@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template :: head(title = 'ideas -' +${category.name})">
+<head th:replace="template :: head(title = 'ideas' +${category.name})">
     <meta charset="UTF-8">
     <title>List of questions</title>
 </head>
@@ -15,7 +15,7 @@
     <div class="row g-5">
         <div class="col-md-8">
             <article class="blog-post">
-                <h2 class="blog-post-title" th:txt="${category.name}"></h2>
+                <h2 class="blog-post-title" th:text="${category.name}"></h2>
 
                 <table class="table">
                     <thead>
