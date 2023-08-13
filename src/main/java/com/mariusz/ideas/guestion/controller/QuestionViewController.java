@@ -69,7 +69,7 @@ public class QuestionViewController {
 
         Page<Question> questionsPage = questionService.findHot(pageRequest);
 
-        model.addAttribute("questionPage",questionsPage);
+        model.addAttribute("questionsPage",questionsPage);
         paging(model,questionsPage);
 
 
