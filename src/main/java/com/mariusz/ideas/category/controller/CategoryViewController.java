@@ -3,6 +3,7 @@ package com.mariusz.ideas.category.controller;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.QuestionService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,11 +41,5 @@ public class CategoryViewController {
 
 		return "category/single";
 	}
-	@GetMapping("hot")
-	public String hotView(
-			@RequestParam(name = "page", defaultValue = "1") int page){
 
-		PageRequest pageRequest = PageRequest.of(page -1, 2);
-		return "question/index";
-	}
 }
