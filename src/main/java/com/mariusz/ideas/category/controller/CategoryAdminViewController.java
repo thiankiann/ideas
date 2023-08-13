@@ -1,7 +1,7 @@
 package com.mariusz.ideas.category.controller;
 
 import com.mariusz.ideas.common.dto.Message;
-import jakarta.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +14,7 @@ import com.mariusz.ideas.category.domain.model.Category;
 import com.mariusz.ideas.category.service.CategoryService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

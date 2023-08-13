@@ -4,8 +4,9 @@ package com.mariusz.ideas.guestion.domain.model;
 
 
 import com.mariusz.ideas.category.domain.model.Category;
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
