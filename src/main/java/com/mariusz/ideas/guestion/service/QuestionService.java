@@ -68,4 +68,9 @@ public class QuestionService {
     public Page<Question> findUnanswered(Pageable pageable) {
         return questionRepository.findUnanswered(pageable);
     }
+
+
+    public Page<Question> findByQuery(String query, Pageable pageable) {
+        return questionRepository.findByQuery(query, pageable);
+    }
 }

@@ -20,4 +20,8 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     @Query("from Question q where q.answers.size = 0")
     Page<Question> findUnanswered(Pageable pageable);
 
+    @Query(value = "select * from questions g where upper(g.name) like upper('%' || :query || '%')" ,
+           countQuery = "select count(*) from q where upper(q.name) like upper('%' || :query || '%')",
+            nativeQuery = true)
+    Page<Question> findByQuery(String query, Pageable pageable);
 }
