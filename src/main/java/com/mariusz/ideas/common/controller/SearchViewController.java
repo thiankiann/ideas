@@ -42,7 +42,7 @@ public class SearchViewController extends IdeasCommonViewController {
         }
         addGlobalAttributes(model);
 
-        return "question/index";
+        return "search/index";
     }
 
 }
