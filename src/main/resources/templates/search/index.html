@@ -45,7 +45,7 @@
 
             <nav th:if="${questionsPage != null and questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
                 <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"
-                   th:href="@{''(size=${questionsPage.size}, page=${pageNumber})}"
+                   th:href="@{''(size=${questionsPage.size}, page=${pageNumber},query=${query})}"
                    th:text=${pageNumber}
                    th:class="${pageNumber==questionsPage.number + 1} ? 'btn btn-outline-primary disabled' : 'btn btn-outline-primary'"></a>
             </nav>
