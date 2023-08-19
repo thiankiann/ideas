@@ -3,12 +3,14 @@ package com.mariusz.ideas.category.domain.model;
 
 
 import com.mariusz.ideas.guestion.domain.model.Question;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +20,9 @@ public class Category {
 	@Id
 	private UUID id;
 
+	//@NotBlank(message = "{validation.name.NotBlank.message}")  // nie dziala wiec zamienilem na ponizszy uproszczony zapis
+	@NotBlank(message = "You need a name of category to save it ")
+	@Size(min = 3, max = 255)
 	private String name;
 
 	@ManyToOne

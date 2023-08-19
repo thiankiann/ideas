@@ -4,8 +4,9 @@ package com.mariusz.ideas.guestion.domain.model;
 
 
 import com.mariusz.ideas.category.domain.model.Category;
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -29,20 +30,20 @@ public class Question {
         this.id = UUID.randomUUID();
     }
 
+    public Question addAnswer(Answer answer){
+        if(answers == null){
+            answers = new LinkedHashSet<>();
+        }
+
+        answer.setQuestion(this);
+        answers.add(answer);
+
+        return this;
+    }
+
     public Question(String name) {
         this();
         this.name = name;
-    }
-
-    public Question addAnswer(Answer answer) {
-        {
-            if(answers == null ){
-                answers = new LinkedHashSet<>();
-            }
-            answers.add(answer);
-            answer.setQuestion(this);
-        }
-        return this;
     }
 
     public Set<Answer> getAnswers() {

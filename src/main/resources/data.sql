@@ -1,10 +1,10 @@
  insert into categories (id, name) values
 (gen_random_uuid(), 'Zdrowie'),
 (gen_random_uuid(), 'Zwierzęta'),
-(gen_random_uuid(), 'Turystyka'),
+(gen_random_uuid(), 'Tourism'),
 (gen_random_uuid(), 'Uroda i Styl'),
 (gen_random_uuid(), 'Kultura'),
-(gen_random_uuid(), 'Edukacja'),
+(gen_random_uuid(), 'Education'),
 (gen_random_uuid(), 'Gry'),
 (gen_random_uuid(), 'Hobby'),
 (gen_random_uuid(), 'Dom i Ogród'),
@@ -26,6 +26,10 @@
 
 
 insert into questions (id, name, category_id) values
-(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select id from categories where name = 'Turystyka')),
-(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select id from categories where name = 'Turystyka'));
+(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select id from categories where name = 'Tourism')),
+(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select id from categories where name = 'Tourism'));
 
+
+ insert into questions(id, name, category_id) values
+ (gen_random_uuid(),'Why you should learn programing?', (select id from categories where name = 'Education')),
+ (gen_random_uuid(),'Why Java is good for beginners?', (select id from categories where name = 'Education'));

@@ -3,6 +3,8 @@ package com.mariusz.ideas.category.controller;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.QuestionService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mariusz.ideas.category.domain.model.Category;
 
 import com.mariusz.ideas.category.service.CategoryService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.List;
@@ -38,4 +41,5 @@ public class CategoryViewController {
 
 		return "category/single";
 	}
+
 }
