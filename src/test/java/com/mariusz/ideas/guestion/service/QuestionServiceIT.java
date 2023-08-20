@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -84,10 +86,31 @@ class QuestionServiceIT {
 
     @Test
     void updateQuestion() {
-    }
+        //given
+        Question question = new Question("Question");
+        question = questionService.createQuestion(question);
 
+        question.setName("updated");
+
+        //when
+        Question result = questionService.updateQuestion(question.getId(), question);
+
+        //then
+        assertThat(result.getId()).isEqualTo(question.getId());
+        assertThat(result.getId()).isEqualTo(questionRepository.getById(question.getId()).getId());
+    }
     @Test
-    void deleteQuestion() {
+    void ShouldDeleteQuestion() {
+        //given
+        Question question = new Question("Question");
+        question = questionService.createQuestion(question);
+        UUID id = question.getId();
+
+        //when
+        Throwable throwable = catchThrowable(() -> questionService.deleteQuestion(id));
+
+        //then
+        assertThat(questionRepository.findById(question.getId())).isEmpty();
     }
 
     @Test
