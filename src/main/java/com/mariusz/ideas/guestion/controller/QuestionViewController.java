@@ -34,6 +34,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     public String indexView(Model model){
         model.addAttribute("questions", questionService.getQuestions());
         addGlobalAttributes(model);
+
         return "question/index";
     }
 
@@ -45,18 +46,21 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         return "question/single";
     }
+
     @GetMapping("add")
     public String addView(Model model){
         model.addAttribute("question", new Question());
 
         return "question/add";
     }
+
     @PostMapping
     public String add(Question question){
         questionService.createQuestion(question);
 
         return "redirect:/questions";
     }
+
     @GetMapping("hot")
     public String hotView(
             @RequestParam(name = "page", defaultValue = "1") int page,
@@ -69,10 +73,6 @@ public class QuestionViewController extends IdeasCommonViewController {
         model.addAttribute("questionsPage", questionsPage);
         paging(model, questionsPage);
         addGlobalAttributes(model);
-
-
-
-
 
         return "question/index";
     }
@@ -94,3 +94,4 @@ public class QuestionViewController extends IdeasCommonViewController {
     }
 
 }
+
