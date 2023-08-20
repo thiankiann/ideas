@@ -1,6 +1,8 @@
 package com.mariusz.ideas.guestion.service;
 
+import com.mariusz.ideas.category.domain.model.Category;
 import com.mariusz.ideas.category.domain.repository.CategoryRepository;
+import com.mariusz.ideas.guestion.domain.model.Answer;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.domain.repository.AnswerRepository;
 import com.mariusz.ideas.guestion.domain.repository.QuestionRepository;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +39,10 @@ class QuestionServiceIT {
 
     @Test
     void shouldGetAllQuestions() {
-
-        //given
+        // given
+        answerRepository.deleteAll();
         questionRepository.deleteAll();
+
 
         questionRepository.saveAll(List.of(
                 new Question("Question1"),
@@ -45,16 +50,15 @@ class QuestionServiceIT {
                 new Question("Question3")
         ));
 
-        //when
+        // when
         List<Question> questions = questionService.getQuestions();
 
-        //then
+        // then
         assertThat(questions)
                 .hasSize(3)
                 .extracting(Question::getName)
                 .containsExactlyInAnyOrder("Question1", "Question2", "Question3");
     }
-
     @Test
     void shouldSingleGetQuestion() {
         //given
@@ -114,11 +118,56 @@ class QuestionServiceIT {
     }
 
     @Test
-    void findByCategoryId() {
+    void shouldFindByAllCategoryId() {
+        //given
+        Category category = new Category("Category1");
+        categoryRepository.save(category);
+
+        Question question1 = new Question("Question1");
+        question1.setCategory(category);
+
+
+        Question question2 = new Question("Question2");
+        question2.setCategory(category);
+
+        Question question3 = new Question("Question3");
+        question3.setCategory(category);
+
+        questionRepository.saveAll(List.of(question1,question2,question3));
+
+        //when
+        List<Question> questions = questionService.findAllByCategoryId(category.getId());
+
+        //then
+        assertThat(questions)
+                .hasSize(3)
+                .extracting(Question::getName)
+                .containsExactlyInAnyOrder("Question1", "Question2", "Question3");
     }
 
     @Test
-    void findHot() {
+    void shouldFindHot() {
+        //given
+        questionRepository.deleteAll();
+
+        Question question1 = new Question("Question1");
+        Question question2 = new Question("Question2");
+        Question question3 = new Question("Question3");
+
+        questionRepository.saveAll(List.of(question1, question2, question3));
+
+        Answer answer = new Answer("Answer");
+        question2.addAnswer(answer);
+        answerRepository.save(answer);
+
+        //when
+        Page<Question> result = questionService.findHot(Pageable.unpaged());
+
+        //then
+        assertThat(result)
+                .hasSize(3)
+                .extracting(Question::getName)
+                .containsExactlyInAnyOrder("Question1","Question2", "Question3");
     }
 
     @Test
