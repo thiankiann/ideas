@@ -148,6 +148,7 @@ class QuestionServiceIT {
     @Test
     void shouldFindHot() {
         //given
+        answerRepository.deleteAll();
         questionRepository.deleteAll();
 
         Question question1 = new Question("Question1");
@@ -171,10 +172,48 @@ class QuestionServiceIT {
     }
 
     @Test
-    void findUnanswered() {
+    void shouldFindUnanswered() {
+        // given
+        questionRepository.deleteAll();
+
+        Question question1 = new Question("Question1");
+        Question question2 = new Question("Question2");
+        Question question3 = new Question("Question3");
+
+        questionRepository.saveAll(List.of(question1, question2, question3));
+
+        Answer answer = new Answer("Answer");
+        question2.addAnswer(answer);
+        answerRepository.save(answer);
+
+        // when
+        Page<Question> result = questionService.findUnanswered(Pageable.unpaged());
+
+        // then
+        assertThat(result)
+                .hasSize(2)
+                .extracting(Question::getName)
+                .containsExactlyInAnyOrder("Question1", "Question3");
     }
 
     @Test
-    void findByQuery() {
+    void shouldFindByQuery() {
+        // given
+        String query = "abc";
+
+        Question question1 = new Question("Question1");
+        Question question2 = new Question("Question2-" + query);
+        Question question3 = new Question("Question3");
+
+        questionRepository.saveAll(List.of(question1, question2, question3));
+
+        // when
+        Page<Question> result = questionService.findByQuery(query, Pageable.unpaged());
+
+        // then
+        assertThat(result)
+                .hasSize(1)
+                .extracting(Question::getId)
+                .containsExactlyInAnyOrder(question2.getId());
     }
 }
