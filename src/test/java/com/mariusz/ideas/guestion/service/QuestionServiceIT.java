@@ -54,11 +54,32 @@ class QuestionServiceIT {
     }
 
     @Test
-    void getQuestion() {
+    void shouldSingleGetQuestion() {
+        //given
+        Question question = new Question("Question2");
+
+        questionRepository.saveAll(List.of(
+                new Question("Question1"),
+                question,
+                new Question("Question3")
+        ));
+        //when
+        Question result = questionService.getQuestion(question.getId());
+
+        //then
+        assertThat(result.getId()).isEqualTo(question.getId());
     }
 
     @Test
-    void createQuestion() {
+    void shouldCreateQuestion() {
+        // given
+        Question question = new Question("Question");
+
+        // when
+        Question result = questionService.createQuestion(question);
+
+        // then
+        assertThat(result.getName()).isEqualTo(question.getName());
     }
 
     @Test

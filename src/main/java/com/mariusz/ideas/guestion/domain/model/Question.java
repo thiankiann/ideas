@@ -24,6 +24,7 @@ public class Question {
 
     @Id
     private UUID id;
+
     private String name;
 
     @ManyToOne
@@ -36,6 +37,11 @@ public class Question {
         this.id = UUID.randomUUID();
     }
 
+    public Question(String name) {
+        this();
+        this.name = name;
+    }
+
     public Question addAnswer(Answer answer){
         if(answers == null){
             answers = new LinkedHashSet<>();
@@ -45,10 +51,5 @@ public class Question {
         answers.add(answer);
 
         return this;
-    }
-
-    public Question(String name) {
-        this();
-        this.name = name;
     }
 }
