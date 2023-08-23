@@ -2,6 +2,7 @@ package com.mariusz.ideas.guestion.service;
 
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.domain.repository.QuestionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,17 +14,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
 
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
     @Transactional(readOnly = true)
     public List<Question> getQuestions() {
         return questionRepository.findAll();
     }
+
     @Transactional(readOnly = true)
     public Question getQuestion(UUID id) {
         return questionRepository.getById(id);
@@ -31,7 +31,6 @@ public class QuestionService {
 
     @Transactional
     public Question createQuestion(Question questionRequest) {
-
         Question question = new Question();
 
         question.setName(questionRequest.getName());
@@ -41,7 +40,6 @@ public class QuestionService {
 
     @Transactional
     public Question updateQuestion(UUID id, Question questionRequest) {
-
         Question question = questionRepository.getById(id);
 
         question.setName(questionRequest.getName());
@@ -55,8 +53,8 @@ public class QuestionService {
     }
 
     @Transactional(readOnly = true)
-    public List<Question> findByCategoryId(UUID id) {
-        return questionRepository.findByCategoryId(id);
+    public List<Question> findAllByCategoryId(UUID id) {
+        return questionRepository.findAllByCategoryId(id);
     }
 
     @Transactional(readOnly = true)
@@ -69,7 +67,7 @@ public class QuestionService {
         return questionRepository.findUnanswered(pageable);
     }
 
-
+    @Transactional(readOnly = true)
     public Page<Question> findByQuery(String query, Pageable pageable) {
         return questionRepository.findByQuery(query, pageable);
     }
