@@ -1,8 +1,10 @@
 package com.mariusz.ideas.category.controller;
 
+import com.mariusz.ideas.common.controller.IdeasCommonViewController;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.QuestionService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -21,15 +23,11 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/categories")
-public class CategoryViewController {
+@RequiredArgsConstructor
+public class CategoryViewController extends IdeasCommonViewController {
 
 	private final CategoryService categoryService;
 	private final QuestionService questionService;
-
-	public CategoryViewController(CategoryService categoryService, QuestionService questionService) {
-		this.categoryService = categoryService;
-		this.questionService = questionService;
-	}
 
 	@GetMapping("{id}")
 	public String singleView(@PathVariable UUID id, Model model){
@@ -38,8 +36,8 @@ public class CategoryViewController {
 
 		model.addAttribute("category", category);
 		model.addAttribute("questions", questions);
+		addGlobalAttributes(model);
 
 		return "category/single";
 	}
-
 }

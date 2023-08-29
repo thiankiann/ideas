@@ -9,8 +9,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-import javax.persistence.*;
-import java.util.Collections;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -33,6 +39,10 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers;
 
+    private LocalDateTime created;
+
+    private LocalDateTime modified;
+
     public Question() {
         this.id = UUID.randomUUID();
     }
@@ -42,8 +52,19 @@ public class Question {
         this.name = name;
     }
 
-    public Question addAnswer(Answer answer){
-        if(answers == null){
+    @PrePersist
+    void prePersist() {
+        created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        modified = LocalDateTime.now();
+    }
+
+    public Question addAnswer(Answer answer) {
+        if (answers == null) {
             answers = new LinkedHashSet<>();
         }
 

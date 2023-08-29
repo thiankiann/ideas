@@ -2,6 +2,7 @@ package com.mariusz.ideas.category.service;
 
 import com.mariusz.ideas.category.domain.model.Category;
 import com.mariusz.ideas.category.domain.repository.CategoryRepository;
+import com.mariusz.ideas.category.dto.CategoryWithStatisticsDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -58,4 +59,5 @@ public class CategoryService {
     public void deleteCategory(UUID id) {
         categoryRepository.deleteById(id);
     }
+
 }

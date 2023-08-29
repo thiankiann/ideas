@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/va/categories")
+@RequestMapping("api/v1/categories")
 @RequiredArgsConstructor
 public class CategoryApiController {
 
@@ -30,18 +30,19 @@ public class CategoryApiController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Category createCategory(@RequestBody Category category){
+    Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
     }
-    @ResponseStatus(HttpStatus.ACCEPTED)
+
     @PutMapping("{id}")
-    Category updateCategory(@PathVariable UUID id, @RequestBody Category category){
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    Category updateCategory(@PathVariable UUID id, @RequestBody Category category) {
         return categoryService.updateCategory(id, category);
     }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
-    void deleteCategory(@PathVariable UUID id){
+    void deleteCategory(@PathVariable UUID id) {
         categoryService.deleteCategory(id);
     }
-
 }

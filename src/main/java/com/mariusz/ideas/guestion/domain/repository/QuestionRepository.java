@@ -1,5 +1,6 @@
 package com.mariusz.ideas.guestion.domain.repository;
 
+import com.mariusz.ideas.common.dto.StatisticsDto;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
-    List<Question> findAllByCategoryId(UUID id);
+    List<Question> findAllByCategoryId(UUID id, Pageable pageable);
 
     @Query("from Question q order by q.answers.size desc")
     Page<Question> findHot(Pageable pageable);
@@ -27,5 +28,12 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
             nativeQuery = true
     )
     Page<Question> findByQuery(String query, Pageable pageable);
+
+    @Query(value = "select * from questions q order by random() limit :limit", nativeQuery = true)
+    List<Question> findRandomQuestions(int limit);
+
+    @Query(value = "select new com.mariusz.ideas.common.dto.StatisticsDto(count(q), count(a)) from Question q join q.answers a")
+    StatisticsDto statistics();
 }
+
 
