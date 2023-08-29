@@ -1,7 +1,7 @@
 package com.mariusz.ideas.guestion.controller;
 
-import com.mariusz.ideas.IdeasConfiguration;
 import com.mariusz.ideas.category.service.CategoryService;
+import com.mariusz.ideas.common.configuration.IdeasConfiguration;
 import com.mariusz.ideas.common.controller.IdeasCommonViewController;
 import com.mariusz.ideas.guestion.domain.model.Question;
 import com.mariusz.ideas.guestion.service.AnswerService;
@@ -9,8 +9,6 @@ import com.mariusz.ideas.guestion.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
